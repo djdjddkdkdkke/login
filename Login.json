@@ -1,6 +1,6 @@
 [
-  { "user": "ALI~BN1", "pass": "Mods1", "type": "vip" },
-  { "user": "ALI~BN2", "pass": "Mods2", "type": "vip" },
-  { "user": "ALI~BN3", "pass": "Mods3", "type": "vip" },
-  { "user": "ALI~BN4", "pass": "Mods4", "type": "vip" }
+  { "user": "DG~BN1", "pass": "Mods1", "type": "vip" },
+  { "user": "DG~BN2", "pass": "Mods2", "type": "vip" },
+  { "user": "DG~BN3", "pass": "Mods3", "type": "vip" },
+  { "user": "DG~BN4", "pass": "Mods4", "type": "vip" }
 ]
