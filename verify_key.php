@@ -14,9 +14,9 @@ if (empty($username) || empty($password)) {
 
 // Hardcoded accounts with expiration
 $accounts = [
-    "RetiredGamer" => ["password" => "fwFlx53092", "expires" => "2025-12-31 23:59:59"],
-    "FreeUser"     => ["password" => "fwFlx53092",   "expires" => "2024-12-31 00:00:00"],
-    "BetaTest"     => ["password" => "fwFlx53092",     "expires" => "2025-07-15 12:00:00"]
+    "RetiredGamer" => ["password" => "fwFlx53092", "expires" => "2026-12-31 23:59:59"],
+    "FreeUser"     => ["password" => "fwFlx53092",   "expires" => "2026-12-31 00:00:00"],
+    "BetaTest"     => ["password" => "fwFlx53092",     "expires" => "2026-07-15 12:00:00"]
 ];
 
 if (isset($accounts[$username])) {
