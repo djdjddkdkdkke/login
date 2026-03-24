@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Love Forever</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
 body {
-  background: #000;
-  height: 100vh;
   margin: 0;
+  height: 100vh;
+  background: #000;
   overflow: hidden;
-  font-family: system-ui;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* القلب */
 #ui {
   position: absolute;
   top: 50%;
@@ -22,6 +20,7 @@ body {
   width: 450px;
   height: 450px;
   transform: translate(-50%, -50%);
+  animation: floatHeart 6s ease-in-out infinite alternate;
 }
 
 #ui .love {
@@ -32,10 +31,10 @@ body {
 }
 
 #ui .love_word {
-  color: #ea80b0;
+  color: #ff69b4;
   font-size: 1.4rem;
   transform: translateY(-100%) rotateZ(-30deg);
-  text-shadow: 0 0 10px #fff;
+  text-shadow: 0 0 10px #ff80bf;
   letter-spacing: 2px;
   white-space: nowrap;
 }
@@ -50,52 +49,47 @@ body {
   animation-delay: calc(var(--i) * -300ms);
 }
 
-/* النص داخل القلب */
 .center-text {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70%;
   transform: translate(-50%, -50%);
-  color: #fff;
   text-align: center;
+  color: #fff;
   font-size: 1.2rem;
   line-height: 1.8;
-  text-shadow: 0 0 15px #ea80b0;
+  text-shadow: 0 0 20px #ff69b4;
   pointer-events: none;
+  animation: textGlow 2s ease-in-out infinite alternate;
 }
 
-/* نفس انيميشنك */
+/* Heart floating */
+@keyframes floatHeart {
+  0% { transform: translate(-52%, -48%) rotate(-1deg); }
+  50% { transform: translate(-48%, -52%) rotate(2deg); }
+  100% { transform: translate(-50%, -50%) rotate(-1deg); }
+}
+
+/* Text glow effect */
+@keyframes textGlow {
+  0% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493; }
+  50% { text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493; }
+  100% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493; }
+}
+
 @keyframes horizontal {
   from { transform: translateX(0px); }
-  to   { transform: translateX(450px); }
+  to { transform: translateX(450px); }
 }
 
 @keyframes vertical {
   0%   { transform: translateY(180px); }
-  10%  { transform: translateY(45px); }
-  15%  { transform: translateY(4.5px); }
-  18%  { transform: translateY(0px); }
-  20%  { transform: translateY(4.5px); }
-  22%  { transform: translateY(34.6px); }
-  24%  { transform: translateY(64px); }
-  25%  { transform: translateY(112px); }
-  26%  { transform: translateY(64px); }
-  28%  { transform: translateY(34px); }
-  30%  { transform: translateY(4px); }
-  32%  { transform: translateY(0px); }
-  35%  { transform: translateY(4px); }
-  40%  { transform: translateY(45px); }
-  50%  { transform: translateY(180px); }
-  71%  { transform: translateY(428px); }
-  75%  { transform: translateY(450px); }
-  79%  { transform: translateY(428px); }
+  50%  { transform: translateY(450px); }
   100% { transform: translateY(180px); }
 }
 
 </style>
 </head>
-
 <body>
 
 <div id="ui">
