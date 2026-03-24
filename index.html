@@ -24,16 +24,16 @@ body {
   z-index: 10;
 }
 
-/* شكل الرعد */
+/* شكل الرعد / السهم */
 .lightning {
   position: absolute;
   top: -200px;
   width: 2px;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, #fff, #ff00aa, #00ffff, transparent);
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, #ffffff, #ff00aa, #00ffff, transparent);
+  box-shadow: 0 0 12px #ff00aa, 0 0 25px #00ffff;
   opacity: 0.9;
-  animation: fall linear forwards, flicker 0.2s infinite;
-  box-shadow: 0 0 10px #ff00aa, 0 0 20px #00ffff;
+  animation: fall linear forwards, flicker 0.15s infinite;
 }
 
 /* نزول */
@@ -48,10 +48,10 @@ body {
   }
 }
 
-/* وميض رعد */
+/* وميض برق */
 @keyframes flicker {
   0% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50% { opacity: 0.4; }
   100% { opacity: 1; }
 }
 </style>
@@ -73,9 +73,9 @@ function createLightning() {
   // مكان عشوائي
   l.style.left = Math.random() * 100 + "vw";
 
-  // طول عشوائي
-  const height = 80 + Math.random() * 200;
-  l.style.height = height + "px";
+  // طول مختلف شوي حتى يصير طبيعي
+  const h = 120 + Math.random() * 200;
+  l.style.height = h + "px";
 
   // سرعة مختلفة (سلو موشن)
   l.style.animationDuration = (2 + Math.random() * 3) + "s";
