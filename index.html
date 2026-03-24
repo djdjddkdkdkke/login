@@ -2,14 +2,14 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>ALI EFFECT</title>
+<title>ALI EFFECT - رعد مستقيم</title>
 
 <style>
 body {
   margin: 0;
-  background: black;
+  background: radial-gradient(circle at center, #0a0f1e, #000000);
   overflow: hidden;
-  font-family: Arial;
+  font-family: 'Arial', sans-serif;
 }
 
 /* النص */
@@ -18,51 +18,93 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ff00aa;
-  font-size: 30px;
+  color: #ff44cc;
+  font-size: 32px;
   font-weight: bold;
+  text-shadow: 0 0 20px #ff00aa, 0 0 40px #ff44cc;
   z-index: 10;
+  background: rgba(0,0,0,0.5);
+  padding: 15px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  white-space: nowrap;
+  letter-spacing: 2px;
 }
 
-/* شكل الرعد / السهم */
+/* شكل الرعد المستقيم */
 .lightning {
   position: absolute;
-  top: -200px;
-  width: 2px;
-  height: 160px;
-  background: linear-gradient(to bottom, transparent, #ffffff, #ff00aa, #00ffff, transparent);
-  box-shadow: 0 0 12px #ff00aa, 0 0 25px #00ffff;
-  opacity: 0.9;
-  animation: fall linear forwards, flicker 0.15s infinite;
+  top: -100px;
+  width: 8px;
+  background: linear-gradient(180deg, 
+    rgba(255,255,255,0) 0%,
+    #ffffff 20%,
+    #ff44aa 50%,
+    #00ffff 80%,
+    rgba(255,255,255,0) 100%);
+  box-shadow: 0 0 20px #ff44aa, 0 0 40px #00ffff, 0 0 8px white;
+  opacity: 0.95;
+  animation: fall linear forwards, pulse 0.2s ease-in-out infinite;
+  border-radius: 10px;
+  pointer-events: none;
 }
 
-/* نزول */
+/* إضافة تأثير تفرعات جانبية بسيطة باستخدام before/after */
+.lightning::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: -12px;
+  width: 6px;
+  height: 25px;
+  background: inherit;
+  border-radius: 5px;
+  transform: rotate(-45deg);
+  box-shadow: inherit;
+  filter: blur(1px);
+}
+
+.lightning::after {
+  content: "";
+  position: absolute;
+  bottom: 25%;
+  right: -12px;
+  width: 6px;
+  height: 35px;
+  background: inherit;
+  border-radius: 5px;
+  transform: rotate(35deg);
+  box-shadow: inherit;
+  filter: blur(1px);
+}
+
+/* حركة السقوط */
 @keyframes fall {
   0% {
-    transform: translateY(-10vh);
-    opacity: 1;
+    transform: translateY(-15vh);
+    opacity: 0.8;
   }
   100% {
-    transform: translateY(110vh);
+    transform: translateY(115vh);
     opacity: 0;
   }
 }
 
-/* وميض برق */
-@keyframes flicker {
-  0% { opacity: 1; }
-  50% { opacity: 0.4; }
-  100% { opacity: 1; }
+/* وميض سريع */
+@keyframes pulse {
+  0% { opacity: 0.8; box-shadow: 0 0 15px #ff44aa, 0 0 30px #00ffff; }
+  100% { opacity: 1; box-shadow: 0 0 30px #ff88ff, 0 0 60px #44ffff; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="text">علينه بس يا ليت</div>
+<div class="text">⚡ علينه بس يا ليت ⚡</div>
 
 <audio autoplay loop>
   <source src="login/song.mp3" type="audio/mpeg">
+  <!-- إذا الملف ما اشتغل، ما راح يظهر خطأ -->
 </audio>
 
 <script>
@@ -70,24 +112,43 @@ function createLightning() {
   const l = document.createElement("div");
   l.classList.add("lightning");
 
-  // مكان عشوائي
+  // مكان عشوائي أفقي
   l.style.left = Math.random() * 100 + "vw";
-
-  // طول مختلف شوي حتى يصير طبيعي
-  const h = 120 + Math.random() * 200;
+  
+  // طول متنوع بين 150 و 350 بكسل
+  const h = 150 + Math.random() * 200;
   l.style.height = h + "px";
-
-  // سرعة مختلفة (سلو موشن)
-  l.style.animationDuration = (2 + Math.random() * 3) + "s";
-
+  
+  // سرعة هادئة بين 2.5 و 5 ثواني
+  const duration = 2.5 + Math.random() * 2.5;
+  l.style.animationDuration = duration + "s";
+  
+  // سماكة متغيرة بسيطة
+  const thickness = 6 + Math.random() * 8;
+  l.style.width = thickness + "px";
+  
+  // إضافة زاوية ميل بسيطة جداً عشان الحركة طبيعية
+  const tilt = -5 + Math.random() * 10;
+  l.style.transform = `rotate(${tilt}deg)`;
+  
   document.body.appendChild(l);
-
+  
+  // إزالة العنصر بعد انتهاء الحركة
   setTimeout(() => {
-    l.remove();
-  }, 5000);
+    if (l && l.remove) l.remove();
+  }, duration * 1000);
 }
 
-setInterval(createLightning, 150);
+// إنشاء رعد كل 250 مللي ثانية (أقل كثافة)
+setInterval(createLightning, 250);
+
+// إضافة تأثير عند تحميل الصفحة
+window.addEventListener('load', () => {
+  // إطلاق 3 رعود فورية
+  for(let i = 0; i < 3; i++) {
+    setTimeout(createLightning, i * 100);
+  }
+});
 </script>
 
 </body>
