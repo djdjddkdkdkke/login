@@ -9,7 +9,6 @@ body {
   margin: 0;
   background: black;
   overflow: hidden;
-  text-align: center;
   font-family: Arial;
 }
 
@@ -25,26 +24,35 @@ body {
   z-index: 10;
 }
 
-/* السهم */
-.arrow {
+/* شكل الرعد */
+.lightning {
   position: absolute;
-  top: -50px;
-  font-size: 20px;
+  top: -200px;
+  width: 2px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #fff, #ff00aa, #00ffff, transparent);
   opacity: 0.9;
-  animation: fall linear forwards;
-  filter: drop-shadow(0 0 6px #ff00aa);
+  animation: fall linear forwards, flicker 0.2s infinite;
+  box-shadow: 0 0 10px #ff00aa, 0 0 20px #00ffff;
 }
 
-/* حركة النزول */
+/* نزول */
 @keyframes fall {
   0% {
-    transform: translateY(-10vh) rotate(0deg);
+    transform: translateY(-10vh);
     opacity: 1;
   }
   100% {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0.2;
+    transform: translateY(110vh);
+    opacity: 0;
   }
+}
+
+/* وميض رعد */
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
 }
 </style>
 </head>
@@ -58,36 +66,28 @@ body {
 </audio>
 
 <script>
-function createArrow() {
-  const arrow = document.createElement("div");
-  arrow.classList.add("arrow");
-
-  // شكل السهم + قلوب + رموز
-  const shapes = ["➤", "➜", "➤", "➤", "➵", "➸", "♥"];
-
-  arrow.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+function createLightning() {
+  const l = document.createElement("div");
+  l.classList.add("lightning");
 
   // مكان عشوائي
-  arrow.style.left = Math.random() * 100 + "vw";
+  l.style.left = Math.random() * 100 + "vw";
 
-  // حجم عشوائي
-  arrow.style.fontSize = (10 + Math.random() * 25) + "px";
+  // طول عشوائي
+  const height = 80 + Math.random() * 200;
+  l.style.height = height + "px";
 
-  // مدة الحركة (سلو موشن)
-  arrow.style.animationDuration = (3 + Math.random() * 4) + "s";
+  // سرعة مختلفة (سلو موشن)
+  l.style.animationDuration = (2 + Math.random() * 3) + "s";
 
-  // ألوان متغيرة (وردي + RGB)
-  const colors = ["#ff00aa", "#ff66cc", "#ff3399", "#ff99dd", "#00ffff", "#ffff00"];
-  arrow.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-  document.body.appendChild(arrow);
+  document.body.appendChild(l);
 
   setTimeout(() => {
-    arrow.remove();
-  }, 7000);
+    l.remove();
+  }, 5000);
 }
 
-setInterval(createArrow, 200);
+setInterval(createLightning, 150);
 </script>
 
 </body>
