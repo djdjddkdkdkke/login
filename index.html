@@ -13,6 +13,7 @@ body {
   font-family: Arial;
 }
 
+/* النص */
 .text {
   position: absolute;
   top: 50%;
@@ -21,22 +22,28 @@ body {
   color: #ff00aa;
   font-size: 30px;
   font-weight: bold;
+  z-index: 10;
 }
 
-.heart {
+/* السهم */
+.arrow {
   position: absolute;
-  color: #ff00aa;
-  animation: fall linear infinite;
+  top: -50px;
+  font-size: 20px;
+  opacity: 0.9;
+  animation: fall linear forwards;
+  filter: drop-shadow(0 0 6px #ff00aa);
 }
 
+/* حركة النزول */
 @keyframes fall {
   0% {
-    transform: translateY(-10vh);
+    transform: translateY(-10vh) rotate(0deg);
     opacity: 1;
   }
   100% {
-    transform: translateY(110vh);
-    opacity: 0;
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.2;
   }
 }
 </style>
@@ -47,27 +54,40 @@ body {
 <div class="text">علينه بس يا ليت</div>
 
 <audio autoplay loop>
-  <source src="song.mp3" type="audio/mpeg">
+  <source src="login/song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "♥";
+function createArrow() {
+  const arrow = document.createElement("div");
+  arrow.classList.add("arrow");
 
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (10 + Math.random() * 20) + "px";
-  heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+  // شكل السهم + قلوب + رموز
+  const shapes = ["➤", "➜", "➤", "➤", "➵", "➸", "♥"];
 
-  document.body.appendChild(heart);
+  arrow.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+
+  // مكان عشوائي
+  arrow.style.left = Math.random() * 100 + "vw";
+
+  // حجم عشوائي
+  arrow.style.fontSize = (10 + Math.random() * 25) + "px";
+
+  // مدة الحركة (سلو موشن)
+  arrow.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+  // ألوان متغيرة (وردي + RGB)
+  const colors = ["#ff00aa", "#ff66cc", "#ff3399", "#ff99dd", "#00ffff", "#ffff00"];
+  arrow.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+  document.body.appendChild(arrow);
 
   setTimeout(() => {
-    heart.remove();
-  }, 5000);
+    arrow.remove();
+  }, 7000);
 }
 
-setInterval(createHeart, 100);
+setInterval(createArrow, 200);
 </script>
 
 </body>
