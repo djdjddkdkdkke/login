@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Love Forever</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+body {
+  background: #000;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: system-ui;
+}
+
+#ui .love {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -225px 0 0 -225px;
+  --i: 1;
+}
+
+#ui .love_word {
+  color: #ea80b0;
+  font-size: 1.4rem;
+  transform: translateY(-100%) rotateZ(-30deg);
+  text-shadow: 0 0 10px #fff;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+#ui .love_horizontal {
+  animation: horizontal 10000ms infinite alternate ease-in-out;
+  animation-delay: calc(var(--i) * -300ms);
+}
+
+#ui .love_vertical {
+  animation: vertical 20000ms infinite linear;
+  animation-delay: calc(var(--i) * -300ms);
+}
+
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-shadow: 0 0 15px #ea80b0;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translate(-50%, -50%) translateY(0px); }
+  50% { transform: translate(-50%, -50%) translateY(-10px); }
+}
+
+.center-text span {
+  display: inline-block;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes horizontal {
+  from { transform: translateX(0px); }
+  to { transform: translateX(450px); }
+}
+
+@keyframes vertical {
+  0% { transform: translateY(180px); }
+  50% { transform: translateY(450px); }
+  100% { transform: translateY(180px); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="ui"></div>
+
+<div class="center-text">
+  <span>
+    My brothers : <br>
+    @VV66Vl | @GNGGD <br>
+    @Fahid_501 | @yha245 <br>
+    @n7rb2y | @RQ12sa
+  </span>
+</div>
+
+<script>
+const N = 100;
+const ui = document.getElementById('ui');
+
+for (let i = 1; i <= N; i++) {
+  const love = document.createElement('div');
+  love.className = 'love';
+  love.style.setProperty('--i', i);
+
+  const h = document.createElement('div');
+  h.className = 'love_horizontal';
+
+  const v = document.createElement('div');
+  v.className = 'love_vertical';
+
+  const word = document.createElement('div');
+  word.className = 'love_word';
+  word.textContent = 'I love you';
+
+  v.appendChild(word);
+  h.appendChild(v);
+  love.appendChild(h);
+  ui.appendChild(love);
+}
+</script>
+
+</body>
+</html>
